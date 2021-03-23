@@ -1,12 +1,12 @@
 import React from 'react'
-import LogoTwit from '../../assets/image/path5.png'
-import LogoFb from '../../assets/image/fb.png'
-import LogoLin from '../../assets/image/Vector.png'
-import LogoN from '../../assets/image/N.png'
-import LogoG from '../../assets/image/G.png'
+import LogoTwit from '../../../assets/image/path5.png'
+import LogoFb from '../../../assets/image/fb.png'
+import LogoLin from '../../../assets/image/Vector.png'
+import LogoN from '../../../assets/image/N.png'
+import LogoG from '../../../assets/image/G.png'
 import { Link } from 'react-router-dom';
 
-export default function Login() {
+export default function Change() {
     return (
         <div className="bodyLogin" style={{flex: 1}}>
             <div className="Content" style={{display:'flex', flexDirection:'row', maxHeight: '100px'}}>
@@ -79,9 +79,9 @@ export default function Login() {
                                     fontSize: 30,
                                     fontWeight: 'bold',
                                     color: 'white',
-                                }}>Are you looking for a job? <br />
-                                there are lots job avaible here <br />
-                                sure suits you
+                                }}>Trusted job search site <br />
+                                will help you find your job <br />
+                                very easily
                                 </p>
                                 <p style={{
                                     marginTop: '30px',
@@ -104,14 +104,14 @@ export default function Login() {
                                     <div style={{
                                         width: '40px',
                                         height: '5px',
-                                        backgroundColor: 'white',                        
+                                        backgroundColor: 'grey',                        
                                         borderRadius: 80,
                                         marginLeft: 15,
                                     }}/>
                                     <div style={{
                                         width: '40px',
                                         height: '5px',
-                                        backgroundColor: 'grey',                        
+                                        backgroundColor: 'white',                        
                                         borderRadius: 80,
                                         marginLeft: 15,
                                     }}/>
@@ -167,22 +167,21 @@ export default function Login() {
                         width: '400px',
                         marginLeft: 250,
                         marginTop: 100,
-
                     }}>
                         <p style={{
                             fontSize: 30,
                             fontWeight: 'bold'
-                        }}>Welcome Back</p>
+                        }}>Change Password</p>
                         <p style={{
                             fontSize: 20,
-                        }}>Let’s Sign in to your account</p>
+                        }}>Type in a web password</p>
 
                         <p style={{
                             marginTop: 20,
                             fontSize: 14,
                             fontWeight: 'bold'
-                        }}>Email Address</p>
-                        <input type="text" name="username" placeholder="yourmail@gmail.com" style={{
+                        }}>New Password</p>
+                        <input type="text" name="username" placeholder="* * * * * * * * *" style={{
                             marginTop: 10,
                             marginBottom: 15,
                             width: '350px',
@@ -194,40 +193,19 @@ export default function Login() {
                         <p style={{
                             fontSize: 14,
                             fontWeight: 'bold'
-                        }}>Password</p>
-                        <input type="text" name="username" placeholder="* * * * * * * * * * * *" style={{
+                        }}>Confirm Password</p>
+                        <input type="text" name="username" placeholder="* * * * * * * * *" style={{
                             marginTop: 10,
-                            marginBottom: 10,
+                            marginBottom: 15,
                             width: '350px',
                             height: '40px',
                             borderRadius: 4,
                             borderColor: '#D7DBE0',
                         }}/>
 
-                        <div style={{
-                            marginTop: 5,
-                            display: 'flex',
-                        }}>
-                            <input type="checkBox" style={{
-                                borderRadius: '#D7DBE0',
-                            }}/>
-                            <p style={{
-                                fontSize: 11,
-                                fontWeight: 'bold',
-                                marginLeft: 10
-                            }}>I agree with the rules</p>
-                            <Link to="/pReset">
-                            <p style={{
-                                fontSize: 11,
-                                fontWeight: 'bold',
-                                marginLeft: 110,
-                                color: 'blue'
-                            }}>Forgotten password?</p>
-                            </Link>
-                        </div>
-                        <Link to="/register">
+                        <Link to="/pChange">
                         <button type="submit" title="Login" placeholder="Login" style={{
-                        marginTop: 20,
+                        marginTop: 10,
                         marginBottom: 10,
                         width: '360px',
                         height: '70px',
@@ -235,25 +213,15 @@ export default function Login() {
                         backgroundColor: '#1A195F',
                         color: 'white',
                         fontSize: 17,
-                        }}>Sign Up</button>    
+                        }}>Reset Password</button>  
                         </Link>
-
-                        <button type="submit" title="Login" placeholder="Login" style={{
-                        marginBottom: 10,
-                        width: '360px',
-                        height: '70px',
-                        borderRadius: 4,
-                        color: 'grey',
-                        fontSize: 17,
-                        fontWeight: 'bold',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderColor: '#D7DBE0',
-                        backgroundColor: 'white'
-                        }}><img src={LogoG} style={{
-                        marginRight: 10,
-                        }}/> Sign Up with Google</button>                        
+                        <Link to="/">
+                        <p style={{
+                            marginLeft: 125,
+                            marginTop: 10,
+                            fontweight: 'bold'
+                        }}>Back to Sign In</p>
+                        </Link>
                     </div>
 
                 </div>

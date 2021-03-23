@@ -28,3 +28,10 @@
 .navbar a:hover {
   color: #f1356d;
 }
+
+::placeholder {
+  position: relative;
+  margin-left: 19;
+  color: #D1D7DF;
+  left: 20px;
+}
