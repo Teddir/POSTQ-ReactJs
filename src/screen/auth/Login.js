@@ -234,7 +234,7 @@ export default function Login() {
                         backgroundColor: '#1A195F',
                         color: 'white',
                         fontSize: 17,
-                        }}>Sign In</button>    
+                        }}>Sign in</button>    
                         </Link>
 
                         <button type="submit" title="Login" placeholder="Login" style={{
