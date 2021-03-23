@@ -55,12 +55,11 @@ export default function Reset() {
                                 textAlign: 'center',
                                 fontWeight: 'bold',
                                 fontSize: 30,
-                            }}><img src={LogoN} style={{alignItems: 'center', height: '20px'}}/></p>
+                            }}><img src={LogoN}  alt="N" style={{alignItems: 'center', height: '20px'}}/></p>
                             </div>
                             <div style={{
                                 // backgroundColor: 'black',
                                 justifyContent: 'flex-end',
-                                marginLeft: 50,
                                 alignSelf: 'center',
                                 marginLeft: '60px',
                             }}>
@@ -120,17 +119,17 @@ export default function Reset() {
                                     flexDirection: 'row',
                                     marginTop: '30px', 
                                 }}>
-                                    <img src={LogoTwit} style={{
+                                    <img src={LogoTwit} alt="Twitter" style={{
                                         width: '17px',
                                         height: '15px',
                                         marginLeft: 2,
                                     }}/>
-                                    <img src={LogoFb} style={{
+                                    <img src={LogoFb} alt="Facebook" style={{
                                         width: '10px',
                                         height: '16px',
                                         marginLeft: 30,
                                     }}/>
-                                    <img src={LogoLin} style={{
+                                    <img src={LogoLin} alt="Linked" style={{
                                         width: '15px',
                                         height: '16px',
                                         marginLeft: 30,
