@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
-    Landing,
     Navbar,
     Login,
     Register,
@@ -10,7 +9,7 @@ import {
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; 
 
 const AppRouter = () => {
-    const [test, setTest] = useState(false);
+    const [test] = useState(false);
 
     return (
         <Router>

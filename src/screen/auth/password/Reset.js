@@ -3,7 +3,6 @@ import LogoTwit from '../../../assets/image/path5.png'
 import LogoFb from '../../../assets/image/fb.png'
 import LogoLin from '../../../assets/image/Vector.png'
 import LogoN from '../../../assets/image/N.png'
-import LogoG from '../../../assets/image/G.png'
 import { Link } from 'react-router-dom';
 
 export default function Reset() {
