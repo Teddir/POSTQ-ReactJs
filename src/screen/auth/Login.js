@@ -163,6 +163,13 @@ export default function Login() {
                                         marginLeft: 30,
                                     }}>Tugas Card</p>
                                     </Link>
+                                    <Link to="/TugasPiramid">
+                                    <p  style={{
+                                        color: 'white',
+                                        fontSize: 12,
+                                        marginLeft: 30,
+                                    }}>Tugas Star</p>
+                                    </Link>
                                 </div>
                             </div>
                     </div>

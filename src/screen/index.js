@@ -7,6 +7,7 @@ import PasswordChange from './auth/password/Change';
 import Login from './auth/Login';
 
 import TugasCard from './misiPakEka/Card';
+import TugasPiramid from './misiPakEka/Piramid';
 
 export {
     Landing,
@@ -15,5 +16,6 @@ export {
     Navbar,
     PasswordReset,
     PasswordChange,
-    TugasCard
+    TugasCard,
+    TugasPiramid
 };

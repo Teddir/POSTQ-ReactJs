@@ -5,7 +5,8 @@ import {
     Register,
     PasswordReset,
     PasswordChange,
-    TugasCard
+    TugasCard,
+    TugasPiramid
 } from '../screen';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; 
 
@@ -42,6 +43,9 @@ const AppRouter = () => {
                     </Route>
                     <Route path="/TugasCard">
                     <TugasCard />
+                    </Route>
+                    <Route path="/TugasPiramid">
+                    <TugasPiramid />
                     </Route>
                 </Switch>
             </div>
