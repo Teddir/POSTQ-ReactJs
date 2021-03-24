@@ -29,7 +29,7 @@ const AppRouter = () => {
         ) : (
             <div className="Content">
                 <Switch>
-                    <Route exact path="/">
+                    <Route  path="/Login">
                     <Login />
                     </Route>
                     <Route path="/register">
@@ -44,7 +44,7 @@ const AppRouter = () => {
                     <Route path="/TugasCard">
                     <TugasCard />
                     </Route>
-                    <Route path="/TugasPiramid">
+                    <Route exact path="/">
                     <TugasPiramid />
                     </Route>
                 </Switch>
