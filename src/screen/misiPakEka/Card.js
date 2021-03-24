@@ -54,6 +54,7 @@ export default function Card() {
             <div style={{
                 display: 'flex',
                 margin: 30,
+                justifyContent: 'center'
             }}>
                 <>
                 {data ? (
