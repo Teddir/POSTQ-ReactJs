@@ -5,6 +5,7 @@ import {
     Register,
     PasswordReset,
     PasswordChange,
+    TugasCard
 } from '../screen';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; 
 
@@ -38,6 +39,9 @@ const AppRouter = () => {
                     </Route>
                     <Route path="/pChange">
                     <PasswordChange />
+                    </Route>
+                    <Route path="/TugasCard">
+                    <TugasCard />
                     </Route>
                 </Switch>
             </div>

@@ -156,6 +156,13 @@ export default function Login() {
                                         fontSize: 12,
                                         marginLeft: 30,
                                     }}>© 2020 Near Job</p>
+                                    <Link to="/TugasCard">
+                                    <p  style={{
+                                        color: 'white',
+                                        fontSize: 12,
+                                        marginLeft: 30,
+                                    }}>Tugas Card</p>
+                                    </Link>
                                 </div>
                             </div>
                     </div>

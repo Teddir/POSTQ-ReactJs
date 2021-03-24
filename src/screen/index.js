@@ -6,6 +6,8 @@ import PasswordReset from './auth/password/Reset';
 import PasswordChange from './auth/password/Change';
 import Login from './auth/Login';
 
+import TugasCard from './misiPakEka/Card';
+
 export {
     Landing,
     Login,
@@ -13,4 +15,5 @@ export {
     Navbar,
     PasswordReset,
     PasswordChange,
+    TugasCard
 };
