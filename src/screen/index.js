@@ -1,4 +1,4 @@
-import Landing from './landing';
+import Landing from './landing/Index';
 import Navbar from './landing/navbar';
 
 import Register from './auth/Register';
@@ -8,6 +8,7 @@ import Login from './auth/Login';
 
 import TugasCard from './misiPakEka/Card';
 import TugasPiramid from './misiPakEka/Piramid';
+import TugasUpdateColor from './misiPakEka/UpdateColor';
 
 export {
     Landing,
@@ -17,5 +18,6 @@ export {
     PasswordReset,
     PasswordChange,
     TugasCard,
-    TugasPiramid
+    TugasPiramid,
+    TugasUpdateColor
 };

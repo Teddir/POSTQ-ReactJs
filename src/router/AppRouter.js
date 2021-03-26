@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import {
+    Landing,
     Navbar,
     Login,
     Register,
     PasswordReset,
     PasswordChange,
     TugasCard,
-    TugasPiramid
+    TugasPiramid,
+    TugasUpdateColor
 } from '../screen';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; 
 
@@ -29,7 +31,10 @@ const AppRouter = () => {
         ) : (
             <div className="Content">
                 <Switch>
-                    <Route  path="/Login">
+                    <Route exact path="/">
+                    <Landing />
+                    </Route>
+                    <Route exact path="/Login">
                     <Login />
                     </Route>
                     <Route path="/register">
@@ -44,8 +49,11 @@ const AppRouter = () => {
                     <Route path="/TugasCard">
                     <TugasCard />
                     </Route>
-                    <Route exact path="/">
+                    <Route exact path="/TugasPiramid">
                     <TugasPiramid />
+                    </Route>
+                    <Route path="/UpdateColor">
+                    <TugasUpdateColor />
                     </Route>
                 </Switch>
             </div>
