@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Landing,
+    Home,
     Navbar,
+    AddProject,
     Login,
     Register,
     PasswordReset,
@@ -11,9 +13,18 @@ import {
     TugasUpdateColor
 } from '../screen';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; 
+import { getProject } from '../services/endpoint/project';
 
 const AppRouter = () => {
     const [test] = useState(false);
+
+    const getData = () => {
+        getProject()
+    }
+
+    useEffect(() => {
+        getData()
+    },[]);
 
     return (
         <Router>
@@ -31,10 +42,16 @@ const AppRouter = () => {
         ) : (
             <div className="Content">
                 <Switch>
-                    <Route exact path="/">
+                    <Route path="/Landing">
                     <Landing />
                     </Route>
-                    <Route exact path="/Login">
+                    <Route exact path="/">
+                    <Home />
+                    </Route>
+                    <Route path="/AddProject">
+                    <AddProject />
+                    </Route>
+                    <Route path="/Login">
                     <Login />
                     </Route>
                     <Route path="/register">
