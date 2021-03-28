@@ -42,7 +42,7 @@ export const api = (method, path, body = null, file = null) => {
     // token !== null ? headers.append('Authorization', 'Bearer' + token) : null
     headers.append("Accept", "application/json");
     !file && headers.append("Content-Type", "application/json");
-    token !== null && headers.append("Authorization", "Bearer " + token);
+    token !== null && headers.append("Authorization", "Bearer " + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9ibGlla2EuaGVyb2t1YXBwLmNvbVwvYXBpXC9sb2dpbiIsImlhdCI6MTYxNjk0NTkxMywiZXhwIjoxNjE2OTQ5NTEzLCJuYmYiOjE2MTY5NDU5MTMsImp0aSI6IllxNnFoMHBtcGtIazNlOXoiLCJzdWIiOjM0LCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.jmTwe2nWwWFSLGemD9z-m4XtZkn7er-s7wkoqRGgLKk');
 
     const data = fetch(host + path, {
         method: method,
@@ -51,6 +51,7 @@ export const api = (method, path, body = null, file = null) => {
     })
     .then((response) => response.json())
     .then((resJson) => {
+        console.log('ini resjson',resJson)
         if (resJson.message) {
             if (resJson.message.split(' ')[0] === 'Token') {
                 store.dispatch(clearToken())

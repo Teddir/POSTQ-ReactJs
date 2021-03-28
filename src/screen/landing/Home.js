@@ -4,23 +4,26 @@ import { Button, Container } from '@material-ui/core'
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from '@material-ui/core/Grid';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 // import { Link } from 'react-router-dom';
 import Load from './landing';
 import { addProject } from '../../services/endpoint/project';
+import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 // import Coba from '../../assets/image/1.png';
 
 const Home = () => {
@@ -32,7 +35,7 @@ const Home = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [openModal, setOpenModal] = useState(false);
     const open = Boolean(anchorEl);
-
+    
     const handleOpenModal = () => {
         setOpenModal(true);
     };
@@ -51,7 +54,8 @@ const Home = () => {
 
     const handleAddProject = () => {
         setLoading(true)
-        addProject(title, avatar, desc, null)
+        console.log('sasasa',title, desc, avatar[0].name)
+        addProject(title, avatar[0], desc, null)
         .then((res)=> {
             console.log(res)
             setLoading(false)
@@ -87,7 +91,7 @@ const Home = () => {
                 <div style={{
                     display: 'flex',
                     justifyContent: 'center',
-                    marginTop: 50
+                    marginTop:10
                 }}>
                     <p style={{
                         fontWeight: 'bold',
@@ -95,51 +99,35 @@ const Home = () => {
                         marginBottom: 20,
                     }}>Mission From Mr Eka</p>
                 </div>
+                <Fab style={{
+                    position: 'absolute',
+                    bottom: 10,
+                    right: 20,
+                    float:'left'
+                    
+                }} color="secondary" aria-label="add" onClick={handleOpenModal}>
+                    <AddIcon />
+                </Fab>
                     <>
+                    <div style={{flexGrow:1}}>
+                    <Grid container spacing={3}>
                     {project.dataProject.map((item) => {
-                        return (
-                            <div key={item.id} style={{
-                                flexGrow: 1,
-                            }}>
-                            <Grid container spacing={3}>
-
-                                <Grid item xs={3}>
+                                return (
+                                <Grid key={item.id} item xs={6} sm={3}>
                                     <Card maxHeight="345" style={{padding: 1}}>
+                                    <CardMedia
+                                        style={{height: 100, paddingTop: '10%' }}
+                                        image={item.avatar}
+                                        title="image"
+                                    />
                                     <CardHeader 
                                     avatar={
                                         <Avatar aria-label="recipe" backgroundColor="red">
                                         T
                                         </Avatar>
                                     }
-                                    action={
-                                        <IconButton 
-                                        aria-label="more"
-                                        aria-controls="long-menu"
-                                        aria-haspopup="true"
-                                        onClick={handleClick}>
-                                            <MoreVertIcon />
-                                        </IconButton>
-                                    }
                                     title={item.title}
                                     subheader={item.created_at}
-                                    />
-                                    <Menu
-                                    id="long-menu"
-                                    anchorEl={anchorEl}
-                                    keepMounted
-                                    open={open}
-                                    onClose={handleClose}
-                                    >
-                                        {/* <Link to="/AddProject"> */}
-                                            <MenuItem  onClick={handleOpenModal}>
-                                            Add Project
-                                            </MenuItem>
-                                        {/* </Link> */}
-                                    </Menu>
-                                    <CardMedia
-                                        style={{height: 100, paddingTop: '10%' }}
-                                        image={item.avatar}
-                                        title="image"
                                     />
                                     <CardContent>
                                         <Typography variant="body2" color="textSecondary" component="p">
@@ -147,18 +135,20 @@ const Home = () => {
                                         </Typography>
                                     </CardContent>
                                     <CardActions disableSpacing>
-                                        <IconButton aria-label="add to favorites">
-                                        <FavoriteIcon color="action"/>
-                                        </IconButton>
                                         <Button style={{height:15, fontSize:10}} variant="contained">css</Button>
+                                        <div style={{
+                                            flex:1,
+                                            textAlign:'right',
+                                        }}>
+                                            <p style={{fontSize:12, fontWeight:'bold'}}>Dilihat: 1</p>
+                                        </div>
                                     </CardActions>
                                     </Card>
                                 </Grid>
-
-                            </Grid>
-                        </div>
-                        )
-                    })}
+                                )
+                            })}
+                    </Grid>
+                    </div>
                     </>
             </Container>
             ): <Load />}
@@ -181,7 +171,7 @@ const Home = () => {
                 <Fade in={openModal}>
                 <div style={{
                     backgroundColor: 'white',
-                    height: '50vh',
+                    height: '60vh',
                     width: '50vh',
                     elevation:30
                 }}>
@@ -195,7 +185,8 @@ const Home = () => {
                         label="Title / Judul" 
                         variant="outlined" 
                         name="title"
-                        onChange={(e) => setTitle(e)}
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
                     <div style={{marginTop:12}}>
@@ -207,7 +198,7 @@ const Home = () => {
                         rows={4}
                         variant="outlined"
                         name="desc"
-                        onChange={(d) => setDesc(d)}
+                        onChange={(d) => setDesc(d.target.value)}
                         />
                     </div>
                     <div style={{marginTop:12}}>
@@ -217,8 +208,33 @@ const Home = () => {
                         id="outlined-basic"  
                         variant="outlined" 
                         name="avatar"
-                        onChange={(a) => setAvatar(a)}
+                        onChange={(a) => setAvatar(a.target.files)}
                         />
+                    </div>
+                    <div style={{marginTop:12}}>
+                        <FormControl component="fieldset">
+                            <FormLabel component="legend">Pilih Bahasa</FormLabel>
+                            <FormGroup aria-label="position" row>
+                            <FormControlLabel
+                                value="php"
+                                control={<Checkbox color="primary" />}
+                                label="Php"
+                                labelPlacement="end"
+                            />
+                            <FormControlLabel
+                                value="javascript"
+                                control={<Checkbox color="primary" />}
+                                label="Javascript"
+                                labelPlacement="end"
+                            />
+                            <FormControlLabel
+                                value="dll"
+                                control={<Checkbox color="primary" />}
+                                label="dll"
+                                labelPlacement="end"
+                            />
+                            </FormGroup>
+                        </FormControl>
                     </div>
                     <div 
                     style={{display:'flex', justifyContent: 'center', marginTop: 10}}>

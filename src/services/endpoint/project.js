@@ -27,5 +27,19 @@ export const addProject = (title, avatar, desc, like) => {
         desc,
         like
     }
-    return api('POST', '/projects/create', body, avatar)
+    if (avatar) {
+        const data = new FormData();
+        data.append('avatar', {
+            name: avatar.name,
+            type: avatar.type,
+            uri: avatar.uri,
+        });
+        Object.keys(body).forEach((key) => {
+        data.append(key, body[key]);
+    });
+    console.log(avatar)
+    return api('POST', '/projects/create', data, avatar)
+    } else {
+        return api('POST', '/barangs/create', body)
+    }
 }
