@@ -21,25 +21,27 @@ export const getProject = () => {
     })
 }
 
-export const addProject = (title, avatar, desc, like) => {
+export const addProject = (title, desc, like, bhs, avatar) => {
+    // console.log('asasasas ====',avatar);
     const body = {
         title,
         desc,
-        like
+        like,
+        bhs,
     }
     if (avatar) {
         const data = new FormData();
-        data.append('avatar', {
-            name: avatar.name,
-            type: avatar.type,
-            uri: avatar.uri,
-        });
+
+        data.append('avatar', avatar.currentFile)
+
         Object.keys(body).forEach((key) => {
         data.append(key, body[key]);
-    });
-    console.log(avatar)
-    return api('POST', '/projects/create', data, avatar)
-    } else {
-        return api('POST', '/barangs/create', body)
+        });
+
+        return api('POST', '/projects/create', data, avatar.currentFile)
     }
+}
+
+export const deleteProject = (id) => {
+    return api('DELETE', `/projects/delete/${id}`)
 }

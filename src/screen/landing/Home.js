@@ -20,17 +20,22 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 // import { Link } from 'react-router-dom';
 import Load from './landing';
-import { addProject } from '../../services/endpoint/project';
+import { addProject, deleteProject } from '../../services/endpoint/project';
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 // import Coba from '../../assets/image/1.png';
 
 const Home = () => {
     const { project } = useSelector((state) => state)
     const [title, setTitle] = useState(null);
-    const [avatar, setAvatar] = useState(null);
+    const [avatar, setAvatar] = useState('');
     const [desc, setDesc] = useState(null);
+    const [bhs, setBhs] = useState(null);
     const [loading, setLoading] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [openModal, setOpenModal] = useState(false);
@@ -52,12 +57,32 @@ const Home = () => {
         setAnchorEl(null);
     };
 
-    const handleAddProject = () => {
-        setLoading(true)
-        console.log('sasasa',title, desc, avatar[0].name)
-        addProject(title, avatar[0], desc, null)
-        .then((res)=> {
+    const handleDeleteProject = (item) => {
+        deleteProject(item.id)
+        .then((res) => {
             console.log(res)
+        })
+    }
+
+    const handleUpdateProject = () => {
+        alert('Siapa Kamu ?')
+    }
+
+    const handleImage = (event) => {
+        setAvatar({
+            currentFile: event.target.files[0],
+            previewImage: URL.createObjectURL(event.target.files[0]),
+            progress: 0,
+            message: ""
+        })
+    }
+
+    const handleAddProject = () => {
+        setLoading(true)    
+        console.log('sasasa',title, desc, avatar)
+        addProject(title, desc, null, bhs, avatar)
+        .then((res)=> {
+            console.log('ini res' ,res)
             setLoading(false)
         })
     }
@@ -100,9 +125,9 @@ const Home = () => {
                     }}>Mission From Mr Eka</p>
                 </div>
                 <Fab style={{
-                    position: 'absolute',
-                    bottom: 10,
-                    right: 20,
+                    position: 'fixed',
+                    bottom: 20,
+                    right: 5,
                     float:'left'
                     
                 }} color="secondary" aria-label="add" onClick={handleOpenModal}>
@@ -126,9 +151,24 @@ const Home = () => {
                                         T
                                         </Avatar>
                                     }
+                                    action={
+                                        <IconButton onClick={handleClick} aria-label="settings">
+                                            <MoreVertIcon />
+                                        </IconButton>
+                                    }
                                     title={item.title}
                                     subheader={item.created_at}
                                     />
+                                    <Menu
+                                    id="simple-menu"
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleClose}
+                                    >
+                                    <MenuItem onChange={handleUpdateProject}>Update</MenuItem>
+                                    <MenuItem >Delete</MenuItem>
+                                    </Menu>
                                     <CardContent>
                                         <Typography variant="body2" color="textSecondary" component="p">
                                             {item.desc}
@@ -208,7 +248,7 @@ const Home = () => {
                         id="outlined-basic"  
                         variant="outlined" 
                         name="avatar"
-                        onChange={(a) => setAvatar(a.target.files)}
+                        onChange={(a) => handleImage(a)}
                         />
                     </div>
                     <div style={{marginTop:12}}>
@@ -216,22 +256,25 @@ const Home = () => {
                             <FormLabel component="legend">Pilih Bahasa</FormLabel>
                             <FormGroup aria-label="position" row>
                             <FormControlLabel
-                                value="php"
+                                value={bhs}
                                 control={<Checkbox color="primary" />}
                                 label="Php"
                                 labelPlacement="end"
+                                onChange={(a) => setBhs(a.target.value)}
                             />
                             <FormControlLabel
-                                value="javascript"
+                                value={bhs}
                                 control={<Checkbox color="primary" />}
                                 label="Javascript"
                                 labelPlacement="end"
+                                onChange={(a) => setBhs(a.target.value)}
                             />
                             <FormControlLabel
-                                value="dll"
+                                value={bhs}
                                 control={<Checkbox color="primary" />}
                                 label="dll"
                                 labelPlacement="end"
+                                onChange={(a) => setBhs(a.target.value)}
                             />
                             </FormGroup>
                         </FormControl>
