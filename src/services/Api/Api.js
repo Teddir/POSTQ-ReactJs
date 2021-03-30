@@ -18,7 +18,7 @@ export const host = 'http://blieka.herokuapp.com/api'
 //     const data = fetch(host + path, {
 //         method: method,
 //         headers: headers,
-//         body: body,
+//         body: body,s
 //     })
 //     .then((res) => res.json())
 //     .then((resJson) => {

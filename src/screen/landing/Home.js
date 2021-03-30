@@ -28,7 +28,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Load from './landing';
 import { addProject, deleteProject } from '../../services/endpoint/project';
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
-// import Coba from '../../assets/image/1.png';
+import Coba from '../../assets/image/1.png';
 
 const Home = () => {
     const { project } = useSelector((state) => state)
@@ -136,7 +136,7 @@ const Home = () => {
                     <>
                     <div style={{flexGrow:1}}>
                     <Grid container spacing={3}>
-                    {project.dataProject.map((item) => {
+                    {/* {project.dataProject.map((item) => {
                                 return (
                                 <Grid key={item.id} item xs={6} sm={3}>
                                     <Card maxHeight="345" style={{padding: 1}}>
@@ -186,7 +186,53 @@ const Home = () => {
                                     </Card>
                                 </Grid>
                                 )
-                            })}
+                            })} */}
+                            <Grid xs={6} sm={3}>
+                                    <Card maxHeight="345" style={{padding: 1}}>
+                                    <CardMedia
+                                        style={{height: 100, paddingTop: '10%' }}
+                                        image={Coba}
+                                        title="image"
+                                    />
+                                    <CardHeader 
+                                    avatar={
+                                        <Avatar aria-label="recipe" backgroundColor="red">
+                                        T
+                                        </Avatar>
+                                    }
+                                    action={
+                                        <IconButton onClick={handleClick} aria-label="settings">
+                                            <MoreVertIcon />
+                                        </IconButton>
+                                    }
+                                    title="Wadidaw"
+                                    subheader="assalamualaikum"
+                                    />
+                                    <Menu
+                                    id="simple-menu"
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleClose}
+                                    >
+                                    <MenuItem onChange={handleUpdateProject}>Update</MenuItem>
+                                    <MenuItem >Delete</MenuItem>
+                                    </Menu>
+                                    <CardContent>
+                                        <Typography variant="body2" color="textSecondary" component="p">
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions disableSpacing>
+                                        <Button style={{height:15, fontSize:10}} variant="contained">css</Button>
+                                        <div style={{
+                                            flex:1,
+                                            textAlign:'right',
+                                        }}>
+                                            <p style={{fontSize:12, fontWeight:'bold'}}>Dilihat: 1</p>
+                                        </div>
+                                    </CardActions>
+                                    </Card>
+                                </Grid>
                     </Grid>
                     </div>
                     </>

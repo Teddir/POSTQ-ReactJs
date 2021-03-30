@@ -12,6 +12,7 @@ import AddProject from './landing/project/addProject';
 import TugasCard from './misiPakEka/Card';
 import TugasPiramid from './misiPakEka/Piramid';
 import TugasUpdateColor from './misiPakEka/UpdateColor';
+import TugasHitung from './misiPakEka/Hitung';
 
 export {
     Landing,
@@ -24,5 +25,6 @@ export {
     PasswordChange,
     TugasCard,
     TugasPiramid,
-    TugasUpdateColor
+    TugasUpdateColor,
+    TugasHitung
 };
