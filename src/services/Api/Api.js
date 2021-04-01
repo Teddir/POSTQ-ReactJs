@@ -50,7 +50,7 @@ export const api = (method, path, body = null, file = null) => {
         body: method === 'GET' ? null : file ? body : JSON.stringify(body),
     })
     .then((response) => response.json())
-    .then((resJson) => {
+    .then((resJson) => { 
         if (resJson.message) {
             if (resJson.message.split(' ')[0] === 'Token') {
                 store.dispatch(clearToken())
