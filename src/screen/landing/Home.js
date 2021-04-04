@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { Button, Container } from '@material-ui/core'
 import Card from '@material-ui/core/Card';
@@ -26,23 +26,51 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 // import { Link } from 'react-router-dom';
 import Load from './landing';
-import { addProject, deleteProject } from '../../services/endpoint/project';
+import { addProject, deleteProject, getProject, updateProject } from '../../services/endpoint/project';
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import Coba from '../../assets/image/1.png';
 
+const handleDeleteProject = (item) => {
+    deleteProject(item)
+    .then((res) => {
+        console.log(res)
+    })
+}
+
 const Home = () => {
     const { project } = useSelector((state) => state)
+    console.log(project);
+    const [dataUpdate, setDataUpdate] = useState(null);
     const [title, setTitle] = useState(null);
     const [avatar, setAvatar] = useState('');
     const [desc, setDesc] = useState(null);
     const [bhs, setBhs] = useState(null);
+    const [see, setSee] = useState(1);
     const [loading, setLoading] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [openModal, setOpenModal] = useState(false);
+    const [openModalUpdate, setOpenModalUpdate] = useState(false);
     const open = Boolean(anchorEl);
+
+    const data = project.dataProject
     
+    const getData = () => {
+        getProject()
+    }
+
+    useEffect(() => {
+        getData()
+    },[]);
+
     const handleOpenModal = () => {
-        setOpenModal(true);
+        const kode = prompt('Masukan kode untuk melanjutkan !!')
+        if (kode === 'wadidaw') {
+            setOpenModal(true);
+        } else if (kode === '') {
+            alert('Maaf akses tidak diterima')
+        } else {
+            alert('Maaf akses tidak diterima')
+        }
     };
 
     const handleCloseModal = () => {
@@ -57,15 +85,20 @@ const Home = () => {
         setAnchorEl(null);
     };
 
-    const handleDeleteProject = (item) => {
-        deleteProject(item.id)
-        .then((res) => {
-            console.log(res)
-        })
+    
+
+    const handleModalUpdate = (item) => {
+        setDataUpdate(item) 
+        setOpenModalUpdate(true)
     }
 
-    const handleUpdateProject = () => {
-        alert('Siapa Kamu ?')
+    const handleCloseModalUpdate = () => {
+        setOpenModalUpdate(false);
+    }
+
+    const handleUpdateProject = (item) => {
+        // console.log(item)
+        
     }
 
     const handleImage = (event) => {
@@ -136,7 +169,7 @@ const Home = () => {
                     <>
                     <div style={{flexGrow:1}}>
                     <Grid container spacing={3}>
-                    {/* {project.dataProject.map((item) => {
+                    {data.map((item) => {
                                 return (
                                 <Grid key={item.id} item xs={6} sm={3}>
                                     <Card maxHeight="345" style={{padding: 1}}>
@@ -166,8 +199,12 @@ const Home = () => {
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose}
                                     >
-                                    <MenuItem onChange={handleUpdateProject}>Update</MenuItem>
-                                    <MenuItem >Delete</MenuItem>
+                                    <div onClick={handleUpdateProject(item)}>
+                                        <MenuItem >Update</MenuItem>
+                                    </div>
+                                    {/* <div onChange={handleDeleteProject(item.id)}> */}
+                                        <MenuItem >Delete</MenuItem>
+                                    {/* </div> */}
                                     </Menu>
                                     <CardContent>
                                         <Typography variant="body2" color="textSecondary" component="p">
@@ -180,59 +217,13 @@ const Home = () => {
                                             flex:1,
                                             textAlign:'right',
                                         }}>
-                                            <p style={{fontSize:12, fontWeight:'bold'}}>Dilihat: 1</p>
+                                            <p style={{fontSize:12, fontWeight:'bold'}}>Dilihat: {see}</p>
                                         </div>
                                     </CardActions>
                                     </Card>
                                 </Grid>
                                 )
-                            })} */}
-                            <Grid xs={6} sm={3}>
-                                    <Card maxHeight="345" style={{padding: 1}}>
-                                    <CardMedia
-                                        style={{height: 100, paddingTop: '10%' }}
-                                        image={Coba}
-                                        title="image"
-                                    />
-                                    <CardHeader 
-                                    avatar={
-                                        <Avatar aria-label="recipe" backgroundColor="red">
-                                        T
-                                        </Avatar>
-                                    }
-                                    action={
-                                        <IconButton onClick={handleClick} aria-label="settings">
-                                            <MoreVertIcon />
-                                        </IconButton>
-                                    }
-                                    title="Wadidaw"
-                                    subheader="assalamualaikum"
-                                    />
-                                    <Menu
-                                    id="simple-menu"
-                                    anchorEl={anchorEl}
-                                    keepMounted
-                                    open={Boolean(anchorEl)}
-                                    onClose={handleClose}
-                                    >
-                                    <MenuItem onChange={handleUpdateProject}>Update</MenuItem>
-                                    <MenuItem >Delete</MenuItem>
-                                    </Menu>
-                                    <CardContent>
-                                        <Typography variant="body2" color="textSecondary" component="p">
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions disableSpacing>
-                                        <Button style={{height:15, fontSize:10}} variant="contained">css</Button>
-                                        <div style={{
-                                            flex:1,
-                                            textAlign:'right',
-                                        }}>
-                                            <p style={{fontSize:12, fontWeight:'bold'}}>Dilihat: 1</p>
-                                        </div>
-                                    </CardActions>
-                                    </Card>
-                                </Grid>
+                            })}
                     </Grid>
                     </div>
                     </>
@@ -335,6 +326,110 @@ const Home = () => {
                     </div>
                 </div>
                 </Fade>
+            </Modal>
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+                open={openModalUpdate}
+                onClose={handleCloseModalUpdate}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                timeout: 500,
+                }}
+            >
+                {dataUpdate ? (
+                    <>
+                    <Fade in={openModalUpdate}>
+                        <div style={{
+                            backgroundColor: 'white',
+                            height: '60vh',
+                            width: '50vh',
+                            elevation:30
+                        }}>
+                            <p style={{display:'flex', justifyContent:'center', fontWeight:'bold', marginTop:5}}>Form Update Project</p>
+                            <div style={{display:'flex', justifyContent: 'center', alignItems: 'center', marginTop:12}}>
+                            <form name="itemAdd" onSubmit={handleUpdateProject(dataUpdate)} style={{width: '40vh'}} noValidate autoComplete="off">
+                            <div>
+                                <TextField 
+                                style={{width:'40vh'}} 
+                                id="outlined-basic" 
+                                label="Title / Judul" 
+                                variant="outlined" 
+                                name="title"
+                                value={dataUpdate.title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                />
+                            </div>
+                            <div style={{marginTop:12}}>
+                                <TextField
+                                style={{width: '40vh'}}
+                                id="outlined-multiline-static"
+                                label="Description"
+                                multiline
+                                rows={4}
+                                variant="outlined"
+                                name="desc"
+                                value={dataUpdate.desc}
+                                onChange={(d) => setDesc(d.target.value)}
+                                />
+                            </div>
+                            <div style={{marginTop:12}}>
+                                <TextField 
+                                type="file" 
+                                style={{width:'40vh'}} 
+                                id="outlined-basic"  
+                                variant="outlined" 
+                                name="avatar"
+                                value={dataUpdate.avatar}
+                                onChange={(a) => handleImage(a)}
+                                />
+                            </div>
+                            <div style={{marginTop:12}}>
+                                <FormControl component="fieldset">
+                                    <FormLabel component="legend">Pilih Bahasa</FormLabel>
+                                    <FormGroup aria-label="position" row>
+                                    <FormControlLabel
+                                        value={bhs}
+                                        control={<Checkbox color="primary" />}
+                                        label="Php"
+                                        labelPlacement="end"
+                                        onChange={(a) => setBhs(a.target.value)}
+                                    />
+                                    <FormControlLabel
+                                        value={bhs}
+                                        control={<Checkbox color="primary" />}
+                                        label="Javascript"
+                                        labelPlacement="end"
+                                        onChange={(a) => setBhs(a.target.value)}
+                                    />
+                                    <FormControlLabel
+                                        value={bhs}
+                                        control={<Checkbox color="primary" />}
+                                        label="dll"
+                                        labelPlacement="end"
+                                        onChange={(a) => setBhs(a.target.value)}
+                                    />
+                                    </FormGroup>
+                                </FormControl>
+                            </div>
+                            <div 
+                            style={{display:'flex', justifyContent: 'center', marginTop: 10}}>
+                                <Button variant="outlined" color="primary" onClick={handleUpdateProject}>
+                                Simpan
+                                </Button>
+                            </div>
+                            </form>
+                            </div>
+                        </div>
+                        </Fade>
+                    </>
+                ):null}
             </Modal>
         </div>
         

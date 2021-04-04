@@ -46,7 +46,7 @@ const AppRouter = () => {
                     <Route path="/Landing">
                     <Landing />
                     </Route>
-                    <Route  path="/Home">
+                    <Route exact path="/">
                     <Home />
                     </Route>
                     <Route path="/AddProject">
@@ -67,13 +67,13 @@ const AppRouter = () => {
                     <Route path="/TugasCard">
                     <TugasCard />
                     </Route>
-                    <Route exact path="/TugasPiramid">
+                    <Route path="/TugasPiramid">
                     <TugasPiramid />
                     </Route>
                     <Route path="/UpdateColor">
                     <TugasUpdateColor />
                     </Route>
-                    <Route exact path="/">
+                    <Route path="/TugasHitung">
                     <TugasHitung />
                     </Route>
                 </Switch>

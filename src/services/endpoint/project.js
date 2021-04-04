@@ -42,6 +42,25 @@ export const addProject = (title, desc, like, bhs, avatar) => {
     }
 }
 
+export const updateProject = (title, desc, like, bhs, avatar, id) => {
+    const body = {
+        title,
+        desc,
+        like,
+        bhs,
+    }
+    if (avatar) {
+        const data = new FormData();
+
+        data.append('avatar', avatar.currentFile)
+
+        Object.keys(body).forEach((key) => {
+        data.append(key, body[key]);
+        });
+        return api('POST', `/projects/update/${id}`, data, avatar.currentFile)
+    }
+}
+
 export const deleteProject = (id) => {
     return api('DELETE', `/projects/delete/${id}`)
 }
