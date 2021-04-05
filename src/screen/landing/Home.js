@@ -45,7 +45,7 @@ const Home = () => {
     const [avatar, setAvatar] = useState('');
     const [desc, setDesc] = useState(null);
     const [bhs, setBhs] = useState(null);
-    const [see, setSee] = useState(1);
+    const [see, setSee] = useState(null);
     const [loading, setLoading] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [openModal, setOpenModal] = useState(false);
@@ -56,6 +56,7 @@ const Home = () => {
     
     const getData = () => {
         getProject()
+        setSee(see + 1)
     }
 
     useEffect(() => {
