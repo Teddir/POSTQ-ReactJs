@@ -11,7 +11,7 @@ const Landing = () => {
         const warna = `rgba(${randomColor()}, ${randomColor()}, ${randomColor()})`
         setTimeout(() => {
             setColor(warna);
-        },1000)
+        }, 1000)
     })
 
     return (
@@ -22,9 +22,9 @@ const Landing = () => {
             justifyContent: 'center',
             alignItems: 'center'
         }}>
-            <div style={{textAlign: 'center'}}>
-            <img style={{height:200}} src="https://media.giphy.com/media/VLUtpRsgyMbTUEVxRt/giphy.gif"/>
-                <p style={{fontSize:25, fontWeight: 'bold', color: color}}>Loading...</p>
+            <div style={{ textAlign: 'center' }}>
+                <img style={{ height: 200 }} src="https://media.giphy.com/media/VLUtpRsgyMbTUEVxRt/giphy.gif" alt="kucing oyen" />
+                <p style={{ fontSize: 25, fontWeight: 'bold', color: color }}>Loading...</p>
             </div>
         </div>
     )
