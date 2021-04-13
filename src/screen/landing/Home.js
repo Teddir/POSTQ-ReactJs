@@ -28,7 +28,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Load from './landing';
 import { addProject, deleteProject, getProject, updateSee } from '../../services/endpoint/project';
 
-
 const Home = () => {
     const { project } = useSelector((state) => state)
     console.log(project);
@@ -45,6 +44,11 @@ const Home = () => {
     // const open = Boolean(anchorEl);
     const history = useHistory();
 
+    var listBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+    var now = new Date()
+    var bulan = now.getMonth()
+    const timeNow = (now.getDate() + "-" + listBulan[bulan] + "-" + now.getFullYear()).toString();
+    console.log(timeNow);
     const data = project.dataProject
 
     const getData = () => {
@@ -52,6 +56,8 @@ const Home = () => {
     }
 
     useEffect(() => {
+        // const time = setTimeout(() => console.log("Hy Adinda"), 3000)
+        // return () => clearTimeout(time)
         getData()
     }, [loading]);
 
@@ -131,10 +137,11 @@ const Home = () => {
     }
 
     const handleDeleteProject = (item) => {
+        console.log(item)
         const kode = prompt('Masukan kode untuk melanjutkan !!')
         if (kode === 'wadidaw') {
             setLoading(true)
-            deleteProject(item)
+            deleteProject(item.id)
                 .then((res) => {
                     console.log(res)
                     setAnchorEl(null);
@@ -146,6 +153,7 @@ const Home = () => {
             alert('Maaf akses tidak diterima')
         }
     }
+
 
 
 
@@ -232,7 +240,7 @@ const Home = () => {
                                                     <div onClick={() => handleUpdateProject(item)}>
                                                         <MenuItem >Update</MenuItem>
                                                     </div>
-                                                    <div onClick={() => handleDeleteProject(item.id)}>
+                                                    <div onClick={() => handleDeleteProject(item)}>
                                                         <MenuItem >Delete</MenuItem>
                                                     </div>
                                                 </Menu>
@@ -243,7 +251,7 @@ const Home = () => {
                                                         </Typography>
                                                     </CardContent>
                                                     <CardActions disableSpacing>
-                                                        <Button style={{ height: 15, fontSize: 10 }} variant="contained">css</Button>
+                                                        <Button style={{ height: 15, fontSize: 10 }} variant="contained">{item.bahasas[0].name}</Button>
                                                         <div style={{
                                                             flex: 1,
                                                             textAlign: 'right',
