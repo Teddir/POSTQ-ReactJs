@@ -11,7 +11,9 @@ import {
     TugasCard,
     TugasPiramid,
     TugasUpdateColor,
-    TugasHitung
+    TugasHitung,
+    TugasKursor,
+    TugasListUser
 } from '../screen';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; 
 import { getProject } from '../services/endpoint/project';
@@ -75,6 +77,12 @@ const AppRouter = () => {
                     </Route>
                     <Route path="/TugasHitung">
                     <TugasHitung />
+                    </Route>
+                    <Route path="/TugasKursor">
+                    <TugasKursor />
+                    </Route>
+                    <Route path="/TugasListUser">
+                    <TugasListUser />
                     </Route>
                 </Switch>
             </div>

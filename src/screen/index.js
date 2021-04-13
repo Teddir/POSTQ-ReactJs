@@ -13,6 +13,8 @@ import TugasCard from './misiPakEka/Card';
 import TugasPiramid from './misiPakEka/Piramid';
 import TugasUpdateColor from './misiPakEka/UpdateColor';
 import TugasHitung from './misiPakEka/Hitung';
+import TugasKursor from './misiPakEka/Kursor';
+import TugasListUser from './misiPakEka/ListUser'; 
 
 export {
     Landing,
@@ -26,5 +28,7 @@ export {
     TugasCard,
     TugasPiramid,
     TugasUpdateColor,
-    TugasHitung
+    TugasHitung,
+    TugasKursor,
+    TugasListUser
 };
