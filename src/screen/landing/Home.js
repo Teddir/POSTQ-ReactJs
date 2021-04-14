@@ -27,6 +27,7 @@ import { useHistory } from "react-router-dom";
 import MenuItem from '@material-ui/core/MenuItem';
 import Load from './landing';
 import { addProject, deleteProject, getProject, updateSee } from '../../services/endpoint/project';
+import { CallReceived } from '@material-ui/icons';
 
 const Home = () => {
     const { project } = useSelector((state) => state)
@@ -41,25 +42,36 @@ const Home = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [openModal, setOpenModal] = useState(false);
     const [openModalUpdate, setOpenModalUpdate] = useState(false);
+    const [search, setSearch] = useState('');
+    const [dataSearch, setDataSearch] = useState([]);
     // const open = Boolean(anchorEl);
     const history = useHistory();
+
+    const data = project.dataProject
 
     var listBulan = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
     var now = new Date()
     var bulan = now.getMonth()
     const timeNow = (now.getDate() + "-" + listBulan[bulan] + "-" + now.getFullYear()).toString();
-    console.log(timeNow);
-    const data = project.dataProject
+
+    const colorNew = `0 5px 20px -5px ` + `rgba(${RandomColor()}, ${RandomColor()}, ${RandomColor()})` ?? '0 5px 20px -5px rgba(0,0,0,0.3)'
+
+    function RandomColor() {
+        return Math.floor(Math.random() * 255)
+    }
 
     const getData = () => {
         getProject()
     }
 
     useEffect(() => {
-        // const time = setTimeout(() => console.log("Hy Adinda"), 3000)
-        // return () => clearTimeout(time)
         getData()
-    }, [loading]);
+        itemSearch()
+    }, [loading, search]);
+
+    // useEffect(() => {
+    //     itemSearch()
+    // }, [search])
 
     const handleOpenModal = () => {
         const kode = prompt('Masukan kode untuk melanjutkan !!')
@@ -154,6 +166,29 @@ const Home = () => {
         }
     }
 
+    const searchInput = (item) => {
+        console.log(item.target.value)
+        const vSearch = item.target.value
+        setSearch(vSearch)
+    }
+
+    const itemSearch = () => {
+        console.log(search)
+        const result = data?.filter((dataFilter) => {
+            if (search === '') {
+                return dataFilter
+            } else {
+                return (
+                    // dataFilter.title.toLowerCase().includes(search.toLowerCase()) || dataFilter.desc.toLowerCase().includes(search.toLowerCase())
+                    dataFilter.title.includes(search) || dataFilter.desc.includes(search)
+                )
+            }
+        })
+        setDataSearch(result);
+        console.log(dataSearch)
+    }
+
+
 
 
 
@@ -179,19 +214,37 @@ const Home = () => {
     // },[])
 
     return (
-        <div >
+        <div style={{ marginRight: '10%', marginLeft: '10%' }}>
             {project ? (
                 <Container >
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',
-                        marginTop: 10
+                        marginTop: 10,
                     }}>
-                        <p style={{
-                            fontWeight: 'bold',
-                            fontSize: 40,
-                            marginBottom: 20,
-                        }}>Mission From Mr Eka</p>
+                        <div style={{
+                            marginBottom: 50
+                        }}>
+                            <p style={{
+                                fontWeight: 'bold',
+                                fontSize: 30,
+                                marginBottom: 20,
+                                textAlign: 'center'
+                            }}>Proyek Mr Eka</p>
+                            <p style={{
+                                fontSize: 20,
+                                marginBottom: 20,
+                                textAlign: 'center'
+                            }}>Hallo pak Eka & staf, Selamat datang di dalam web sederhana saya, <br /> kritik dan sarannya dipersilahkan.</p>
+                            <TextField
+                                id="outlined-secondary"
+                                label="Search Proyek"
+                                variant="outlined"
+                                placeholder="Tugas Apa Aja"
+                                style={{ width: '100%' }}
+                                onChange={(a) => searchInput(a)}
+                            />
+                        </div>
                     </div>
                     <Fab style={{
                         position: 'fixed',
@@ -204,71 +257,153 @@ const Home = () => {
                     </Fab>
                     <>
                         <div style={{ flexGrow: 1 }}>
-                            <Grid container spacing={3}>
-                                {data.map((item) => {
-                                    return (
-                                        <Grid key={item.id} item xs={6} sm={3}>
-                                            <Card maxHeight="345" style={{ padding: 1 }}>
-                                                <div onClick={() => handleShow(item)}>
-                                                    <CardMedia
-                                                        style={{ height: 100, paddingTop: '10%' }}
-                                                        image={item.avatar}
-                                                        title="image"
-                                                    />
-                                                </div>
-                                                <CardHeader
-                                                    avatar={
-                                                        <Avatar aria-label="recipe" backgroundColor="red">
-                                                            T
-                                                        </Avatar>
-                                                    }
-                                                    action={
-                                                        <IconButton onClick={handleClick} aria-label="settings">
-                                                            <MoreVertIcon />
-                                                        </IconButton>
-                                                    }
-                                                    title={item.title}
-                                                    subheader={item.created_at}
-                                                />
-                                                <Menu
-                                                    id="simple-menu"
-                                                    anchorEl={anchorEl}
-                                                    keepMounted
-                                                    open={Boolean(anchorEl)}
-                                                    onClose={handleClose}
-                                                >
-                                                    <div onClick={() => handleUpdateProject(item)}>
-                                                        <MenuItem >Update</MenuItem>
-                                                    </div>
-                                                    <div onClick={() => handleDeleteProject(item)}>
-                                                        <MenuItem >Delete</MenuItem>
-                                                    </div>
-                                                </Menu>
-                                                <div onClick={() => handleShow(item)}>
-                                                    <CardContent>
-                                                        <Typography variant="body2" color="textSecondary" component="p">
-                                                            {item.desc}
-                                                        </Typography>
-                                                    </CardContent>
-                                                    <CardActions disableSpacing>
-                                                        <Button style={{ height: 15, fontSize: 10 }} variant="contained">{item.bahasas[0].name}</Button>
-                                                        <div style={{
-                                                            flex: 1,
-                                                            textAlign: 'right',
-                                                        }}>
-                                                            <p style={{ fontSize: 12, fontWeight: 'bold' }}>Dilihat: {item.see ? item.see : '0'}</p>
+                            <Grid container spacing={8}>
+                                {dataSearch?.length > 0 ?
+                                    <>
+                                        {dataSearch.map((item) => {
+                                            return (
+                                                <Grid key={item.id} item xs={4} spacing={3}>
+                                                    <Card maxHeight="345" style={{
+                                                        padding: 1,
+                                                        boxShadow: item.created_at >= timeNow ? colorNew : '0 5px 20px -5px rgba(0,0,0,0.3)',
+                                                        "&:hover": {
+                                                            boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
+                                                        },
+                                                    }}>
+                                                        <div onClick={() => handleShow(item)}>
+                                                            <CardMedia
+                                                                style={{ height: 100, paddingTop: '10%', }}
+                                                                image={item.avatar}
+                                                                title="image"
+                                                            />
                                                         </div>
-                                                    </CardActions>
-                                                </div>
-                                            </Card>
-                                        </Grid>
+                                                        <CardHeader
+                                                            avatar={
+                                                                <Avatar aria-label="recipe" backgroundColor="red">
+                                                                    T
+                                                        </Avatar>
+                                                            }
+                                                            action={
+                                                                <IconButton onClick={handleClick} aria-label="settings">
+                                                                    <MoreVertIcon />
+                                                                </IconButton>
+                                                            }
+                                                            title={item.title}
+                                                            subheader={item.created_at}
+                                                        />
+                                                        <Menu
+                                                            id="simple-menu"
+                                                            anchorEl={anchorEl}
+                                                            keepMounted
+                                                            open={Boolean(anchorEl)}
+                                                            onClose={handleClose}
+                                                        >
+                                                            <div onClick={() => handleUpdateProject(item)}>
+                                                                <MenuItem >Update</MenuItem>
+                                                            </div>
+                                                            <div onClick={() => handleDeleteProject(item)}>
+                                                                <MenuItem >Delete</MenuItem>
+                                                            </div>
+                                                        </Menu>
+                                                        <div onClick={() => handleShow(item)}>
+                                                            <CardContent>
+                                                                <Typography variant="body2" color="textSecondary" component="p">
+                                                                    {item.desc}
+                                                                </Typography>
+                                                            </CardContent>
+                                                            <CardActions disableSpacing>
+                                                                <Button style={{ height: 15, fontSize: 10 }} variant="contained">{item.bahasas[0].name}</Button>
+                                                                <div style={{
+                                                                    flex: 1,
+                                                                    textAlign: 'right',
+                                                                }}>
+                                                                    <p style={{ fontSize: 12, fontWeight: 'bold' }}>Dilihat: {item.see ? item.see : '0'}</p>
+                                                                </div>
+                                                            </CardActions>
+                                                        </div>
+                                                    </Card>
+                                                </Grid>
+                                            )
+                                        })}
+                                    </>
+                                    :
+                                    (
+                                        <>
+                                            {data.map((item) => {
+                                                return (
+                                                    <Grid key={item.id} item xs={4} spacing={3}>
+                                                        <Card maxHeight="345" style={{
+                                                            padding: 1,
+                                                            boxShadow: item.created_at >= timeNow ? colorNew : '0 5px 20px -5px rgba(0,0,0,0.3)',
+                                                            "&:hover": {
+                                                                boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
+                                                            },
+                                                        }}>
+                                                            <div onClick={() => handleShow(item)}>
+                                                                <CardMedia
+                                                                    style={{ height: 100, paddingTop: '10%', }}
+                                                                    image={item.avatar}
+                                                                    title="image"
+                                                                />
+                                                            </div>
+                                                            <CardHeader
+                                                                avatar={
+                                                                    <Avatar aria-label="recipe" backgroundColor="red">
+                                                                        T
+                                                        </Avatar>
+                                                                }
+                                                                action={
+                                                                    <IconButton onClick={handleClick} aria-label="settings">
+                                                                        <MoreVertIcon />
+                                                                    </IconButton>
+                                                                }
+                                                                title={item.title}
+                                                                subheader={item.created_at}
+                                                            />
+                                                            <Menu
+                                                                id="simple-menu"
+                                                                anchorEl={anchorEl}
+                                                                keepMounted
+                                                                open={Boolean(anchorEl)}
+                                                                onClose={handleClose}
+                                                            >
+                                                                <div onClick={() => handleUpdateProject(item)}>
+                                                                    <MenuItem >Update</MenuItem>
+                                                                </div>
+                                                                <div onClick={() => handleDeleteProject(item)}>
+                                                                    <MenuItem >Delete</MenuItem>
+                                                                </div>
+                                                            </Menu>
+                                                            <div onClick={() => handleShow(item)}>
+                                                                <CardContent>
+                                                                    <Typography variant="body2" color="textSecondary" component="p">
+                                                                        {item.desc}
+                                                                    </Typography>
+                                                                </CardContent>
+                                                                <CardActions disableSpacing>
+                                                                    <Button style={{ height: 15, fontSize: 10 }} variant="contained">{item.bahasas[0].name}</Button>
+                                                                    <div style={{
+                                                                        flex: 1,
+                                                                        textAlign: 'right',
+                                                                    }}>
+                                                                        <p style={{ fontSize: 12, fontWeight: 'bold' }}>Dilihat: {item.see ? item.see : '0'}</p>
+                                                                    </div>
+                                                                </CardActions>
+                                                            </div>
+                                                        </Card>
+                                                    </Grid>
+                                                )
+                                            })}
+                                        </>
                                     )
-                                })}
+                                }
+
                             </Grid>
                         </div>
                     </>
                 </Container>
-            ) : <Load />}
+            ) : <Load />
+            }
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -482,9 +617,10 @@ const Home = () => {
                     </>
                 ) : null}
             </Modal>
-        </div>
+        </div >
 
     )
+
 }
 
 export default Home
