@@ -26,6 +26,7 @@ import Menu from '@material-ui/core/Menu';
 import { useHistory } from "react-router-dom";
 import MenuItem from '@material-ui/core/MenuItem';
 import Load from './landing';
+import Navbar from './navbar';
 import { addProject, deleteProject, getProject, updateSee } from '../../services/endpoint/project';
 import { CallReceived } from '@material-ui/icons';
 
@@ -214,122 +215,56 @@ const Home = () => {
     // },[])
 
     return (
-        <div style={{ marginRight: '10%', marginLeft: '10%' }}>
+        <div>
             {project ? (
-                <Container >
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        marginTop: 10,
-                    }}>
+                <div >
+                    <Container >
+                        <Navbar />
                         <div style={{
-                            marginBottom: 50
+                            display: 'flex',
+                            justifyContent: 'center',
+                            marginTop: 40,
                         }}>
-                            <p style={{
-                                fontWeight: 'bold',
-                                fontSize: 30,
-                                marginBottom: 20,
-                                textAlign: 'center'
-                            }}>Proyek Mr Eka</p>
-                            <p style={{
-                                fontSize: 20,
-                                marginBottom: 20,
-                                textAlign: 'center'
-                            }}>Hallo pak Eka & staf, Selamat datang di dalam web sederhana saya, <br /> kritik dan sarannya dipersilahkan.</p>
-                            <TextField
-                                id="outlined-secondary"
-                                label="Search Proyek"
-                                variant="outlined"
-                                placeholder="Tugas Apa Aja"
-                                style={{ width: '100%' }}
-                                onChange={(a) => searchInput(a)}
-                            />
+                            <div style={{
+                                marginBottom: 50
+                            }}>
+                                <p style={{
+                                    fontWeight: 'bold',
+                                    fontSize: 30,
+                                    marginBottom: 20,
+                                    textAlign: 'center'
+                                }}>Proyek Mr Eka</p>
+                                <p style={{
+                                    fontSize: 20,
+                                    marginBottom: 20,
+                                    textAlign: 'center'
+                                }}>Hallo pak Eka & staf, Selamat datang di dalam web sederhana saya, <br /> kritik dan sarannya dipersilahkan.</p>
+                                <TextField
+                                    id="outlined-secondary"
+                                    label="Search Proyek"
+                                    variant="outlined"
+                                    placeholder="Tugas Apa Aja"
+                                    style={{ width: '100%' }}
+                                    onChange={(a) => searchInput(a)}
+                                    color="#9575cd"
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <Fab style={{
-                        position: 'fixed',
-                        bottom: 20,
-                        right: 5,
-                        float: 'left'
+                        {/* <Fab style={{
+                            position: 'fixed',
+                            bottom: 20,
+                            right: 10,
+                            float: 'left'
 
-                    }} color="secondary" aria-label="add" onClick={handleOpenModal}>
-                        <AddIcon />
-                    </Fab>
-                    <>
-                        <div style={{ flexGrow: 1 }}>
-                            <Grid container spacing={8}>
-                                {dataSearch?.length > 0 ?
-                                    <>
-                                        {dataSearch.map((item) => {
-                                            return (
-                                                <Grid key={item.id} item xs={4} spacing={3}>
-                                                    <Card maxHeight="345" style={{
-                                                        padding: 1,
-                                                        boxShadow: item.created_at >= timeNow ? colorNew : '0 5px 20px -5px rgba(0,0,0,0.3)',
-                                                        "&:hover": {
-                                                            boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
-                                                        },
-                                                    }}>
-                                                        <div onClick={() => handleShow(item)}>
-                                                            <CardMedia
-                                                                style={{ height: 100, paddingTop: '10%', }}
-                                                                image={item.avatar}
-                                                                title="image"
-                                                            />
-                                                        </div>
-                                                        <CardHeader
-                                                            avatar={
-                                                                <Avatar aria-label="recipe" backgroundColor="red">
-                                                                    T
-                                                        </Avatar>
-                                                            }
-                                                            action={
-                                                                <IconButton onClick={handleClick} aria-label="settings">
-                                                                    <MoreVertIcon />
-                                                                </IconButton>
-                                                            }
-                                                            title={item.title}
-                                                            subheader={item.created_at}
-                                                        />
-                                                        <Menu
-                                                            id="simple-menu"
-                                                            anchorEl={anchorEl}
-                                                            keepMounted
-                                                            open={Boolean(anchorEl)}
-                                                            onClose={handleClose}
-                                                        >
-                                                            <div onClick={() => handleUpdateProject(item)}>
-                                                                <MenuItem >Update</MenuItem>
-                                                            </div>
-                                                            <div onClick={() => handleDeleteProject(item)}>
-                                                                <MenuItem >Delete</MenuItem>
-                                                            </div>
-                                                        </Menu>
-                                                        <div onClick={() => handleShow(item)}>
-                                                            <CardContent>
-                                                                <Typography variant="body2" color="textSecondary" component="p">
-                                                                    {item.desc}
-                                                                </Typography>
-                                                            </CardContent>
-                                                            <CardActions disableSpacing>
-                                                                <Button style={{ height: 15, fontSize: 10 }} variant="contained">{item.bahasas[0].name}</Button>
-                                                                <div style={{
-                                                                    flex: 1,
-                                                                    textAlign: 'right',
-                                                                }}>
-                                                                    <p style={{ fontSize: 12, fontWeight: 'bold' }}>Dilihat: {item.see ? item.see : '0'}</p>
-                                                                </div>
-                                                            </CardActions>
-                                                        </div>
-                                                    </Card>
-                                                </Grid>
-                                            )
-                                        })}
-                                    </>
-                                    :
-                                    (
+                        }} color="secondary" aria-label="add" onClick={handleOpenModal}>
+                            <AddIcon />
+                        </Fab> */}
+                        <>
+                            <div style={{ flexGrow: 1 }}>
+                                <Grid container spacing={8}>
+                                    {dataSearch?.length > 0 ?
                                         <>
-                                            {data.map((item) => {
+                                            {dataSearch.map((item) => {
                                                 return (
                                                     <Grid key={item.id} item xs={4} spacing={3}>
                                                         <Card maxHeight="345" style={{
@@ -395,13 +330,84 @@ const Home = () => {
                                                 )
                                             })}
                                         </>
-                                    )
-                                }
+                                        :
+                                        (
+                                            <>
+                                                {data.map((item) => {
+                                                    return (
+                                                        <Grid key={item.id} item xs={4} spacing={3}>
+                                                            <Card maxHeight="345" style={{
+                                                                padding: 1,
+                                                                boxShadow: item.created_at >= timeNow ? colorNew : '0 5px 20px -5px rgba(0,0,0,0.3)',
+                                                                "&:hover": {
+                                                                    boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
+                                                                },
+                                                            }}>
+                                                                <div onClick={() => handleShow(item)}>
+                                                                    <CardMedia
+                                                                        style={{ height: 100, paddingTop: '10%', }}
+                                                                        image={item.avatar}
+                                                                        title="image"
+                                                                    />
+                                                                </div>
+                                                                <CardHeader
+                                                                    avatar={
+                                                                        <Avatar aria-label="recipe" backgroundColor="red">
+                                                                            T
+                                                        </Avatar>
+                                                                    }
+                                                                    action={
+                                                                        <IconButton onClick={handleClick} aria-label="settings">
+                                                                            <MoreVertIcon />
+                                                                        </IconButton>
+                                                                    }
+                                                                    title={item.title}
+                                                                    subheader={item.created_at}
+                                                                />
+                                                                <Menu
+                                                                    id="simple-menu"
+                                                                    anchorEl={anchorEl}
+                                                                    keepMounted
+                                                                    open={Boolean(anchorEl)}
+                                                                    onClose={handleClose}
+                                                                >
+                                                                    <div onClick={() => handleUpdateProject(item)}>
+                                                                        <MenuItem >Update</MenuItem>
+                                                                    </div>
+                                                                    <div onClick={() => handleDeleteProject(item)}>
+                                                                        <MenuItem >Delete</MenuItem>
+                                                                    </div>
+                                                                </Menu>
+                                                                <div onClick={() => handleShow(item)}>
+                                                                    <CardContent>
+                                                                        <Typography variant="body2" color="textSecondary" component="p">
+                                                                            {item.desc}
+                                                                        </Typography>
+                                                                    </CardContent>
+                                                                    <CardActions disableSpacing>
+                                                                        <Button style={{ height: 15, fontSize: 10 }} variant="contained">{item.bahasas[0].name}</Button>
+                                                                        <div style={{
+                                                                            flex: 1,
+                                                                            textAlign: 'right',
+                                                                        }}>
+                                                                            <p style={{ fontSize: 12, fontWeight: 'bold' }}>Dilihat: {item.see ? item.see : '0'}</p>
+                                                                        </div>
+                                                                    </CardActions>
+                                                                </div>
+                                                            </Card>
+                                                        </Grid>
+                                                    )
+                                                })}
+                                            </>
+                                        )
+                                    }
 
-                            </Grid>
-                        </div>
-                    </>
-                </Container>
+                                </Grid>
+                            </div>
+                        </>
+                    </Container>
+                </div >
+
             ) : <Load />
             }
             <Modal
@@ -617,7 +623,7 @@ const Home = () => {
                     </>
                 ) : null}
             </Modal>
-        </div >
+        </div>
 
     )
 
