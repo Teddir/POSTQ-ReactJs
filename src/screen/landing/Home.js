@@ -9,8 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
+// import Fab from '@material-ui/core/Fab';
+// import AddIcon from '@material-ui/icons/Add';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -28,7 +28,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Load from './landing';
 import Navbar from './navbar';
 import { addProject, deleteProject, getProject, updateSee } from '../../services/endpoint/project';
-import { CallReceived } from '@material-ui/icons';
+// import { CallReceived } from '@material-ui/icons';
 
 const Home = () => {
     const { project } = useSelector((state) => state)
@@ -55,7 +55,8 @@ const Home = () => {
     var bulan = now.getMonth()
     const timeNow = (now.getDate() + "-" + listBulan[bulan] + "-" + now.getFullYear()).toString();
 
-    const colorNew = `0 5px 20px -5px ` + `rgba(${RandomColor()}, ${RandomColor()}, ${RandomColor()})` ?? '0 5px 20px -5px rgba(0,0,0,0.3)'
+    // eslint-disable-next-line no-useless-concat
+    const colorNew = "0 5px 20px -5px" + `rgba(${RandomColor()}, ${RandomColor()}, ${RandomColor()})` ?? '0 5px 20px -5px rgba(0,0,0,0.3)'
 
     function RandomColor() {
         return Math.floor(Math.random() * 255)
@@ -74,16 +75,16 @@ const Home = () => {
     //     itemSearch()
     // }, [search])
 
-    const handleOpenModal = () => {
-        const kode = prompt('Masukan kode untuk melanjutkan !!')
-        if (kode === 'wadidaw') {
-            setOpenModal(true);
-        } else if (kode === '') {
-            alert('Maaf akses tidak diterima')
-        } else {
-            alert('Maaf akses tidak diterima')
-        }
-    };
+    // const handleOpenModal = () => {
+    //     const kode = prompt('Masukan kode untuk melanjutkan !!')
+    //     if (kode === 'wadidaw') {
+    //         setOpenModal(true);
+    //     } else if (kode === '') {
+    //         alert('Maaf akses tidak diterima')
+    //     } else {
+    //         alert('Maaf akses tidak diterima')
+    //     }
+    // };
 
     const handleCloseModal = () => {
         setOpenModal(false);
