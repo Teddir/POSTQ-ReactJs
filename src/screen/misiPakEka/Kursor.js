@@ -1,38 +1,33 @@
 import React, { useState, useEffect } from 'react'
 
 export default function Kursor() {
-    const [mouse, setMouse] = useState(null);
-    const [color, setColor] = useState(null);   
-    const [time, setTime] = useState(false);
-
-    const kursor = document.querySelector(".kursor");
+    // const [mouse, setMouse] = useState(null);
+    const [left, setLeft] = useState();
+    const [top, setTop] = useState();
+    const [backgroundColor, setBackgroundcolor] = useState();
+    const [boxShadow, setBoxshadow] = useState();
+    let kamu = 0;
+    let kamu1 = 0;
+    let kamu2 = 0;
 
     window.onmousemove = e => {
         setTimeout(() => {
             // console.log(kursor);
-            kursor.style.left = `${e.pageX - 25}px`;
-            kursor.style.top = `${e.pageY - 25}px`;
-            setMouse(true);
-            setColor(false);
-            if (mouse) {
-                // setTime(true);
-                console.log("mouse bergerak");
-            } 
-        }, 100);
+            setLeft(`${e.pageX - 25}px`);
+            setTop(`${e.pageY - 25}px`);
+            col();
+        }, 500);
     };
-    
-    setInterval(() => {
-        if (time === true) {
-            kursor.style.backgroundColor = "rgb(" + RandomColor() + "," + RandomColor() + "," + RandomColor() + ")";
-        }
-        if (color === true) {
-            console.log("color diganti")
-        }
-    }, 1000)
 
-    function RandomColor() {
-        return parseInt(Math.random() * 255);
-    }
+    function col() {
+        kamu = Math.floor(Math.random() * 100);
+        kamu1 = Math.floor(Math.random() * 80);
+        kamu2 = Math.floor(Math.random() * 90);
+        setTimeout(() => {
+          setBackgroundcolor(`rgb(${kamu}, ${kamu1}, ${kamu2}, ${kamu2})`);
+          setBoxshadow(`-1px 1px 10px rgba(${kamu}, ${kamu1}, ${kamu2}, ${kamu2})`);
+        }, 500);
+      }
     
     return (
         <div style={{
@@ -40,11 +35,12 @@ export default function Kursor() {
             height: '100vh'
         }}>
             <div class="kursor" style={{
-                backgroundColor: 'blue',
+                backgroundColor: backgroundColor ? backgroundColor : 'blue',
+                boxShadow: boxShadow ? boxShadow : 0,
                 width: '50px',
                 height: '50px',
-                left: '50%',
-                top:'50%',
+                left: left ? left : '50%',
+                top: top ? top : '50%',
                 borderRadius: '100%',
                 position: 'relative',
             }}></div>
