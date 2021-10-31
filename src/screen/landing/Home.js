@@ -23,7 +23,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import MenuItem from '@material-ui/core/MenuItem';
 import Load from './landing';
 import Navbar from './navbar';
@@ -32,7 +32,7 @@ import { addProject, deleteProject, getProject, updateSee } from '../../services
 
 const Home = () => {
     const { project } = useSelector((state) => state)
-    console.log(project);
+    // console.log(project);
     const [dataUpdate, setDataUpdate] = useState(null);
     const [title, setTitle] = useState(null);
     const [avatar, setAvatar] = useState('');
@@ -46,7 +46,7 @@ const Home = () => {
     const [search, setSearch] = useState('');
     const [dataSearch, setDataSearch] = useState([]);
     // const open = Boolean(anchorEl);
-    const history = useHistory();
+    // const history = useHistory();
 
     const data = project.dataProject
 
@@ -127,7 +127,8 @@ const Home = () => {
     const handleShow = (item) => {
         console.log('showMe')
         // pindah screen
-        history.push(item.link)
+        // history.push(item.link)
+        window.open(item.link)
 
         // tambah penonton
         const show = parseInt(item.see) + 1
@@ -141,7 +142,7 @@ const Home = () => {
 
     const handleAddProject = () => {
         setLoading(true)
-        console.log('sasasa', title, desc, bahasa_id, link, avatar)
+        // console.log('sasasa', title, desc, bahasa_id, link, avatar)
         addProject(title, desc, 0, bahasa_id, link, avatar)
             .then((res) => {
                 console.log('ini res', res)
@@ -372,9 +373,9 @@ const Home = () => {
                                                                     open={Boolean(anchorEl)}
                                                                     onClose={handleClose}
                                                                 >
-                                                                    <div onClick={() => handleUpdateProject(item)}>
+                                                                    {/* <div onClick={() => handleUpdateProject(item)}>
                                                                         <MenuItem >Update</MenuItem>
-                                                                    </div>
+                                                                    </div> */}
                                                                     <div onClick={() => handleDeleteProject(item)}>
                                                                         <MenuItem >Delete</MenuItem>
                                                                     </div>
